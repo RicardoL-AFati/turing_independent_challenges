@@ -31,11 +31,13 @@ class SuperFizzBuzz
 
     case number_or_range.length
       when 1
-        output(number_or_range.to_i)
+        output(number_or_range.first.to_i)
       when 2
-        output_range(number_or_range.first.to_i, number_or_range.last.to_i)
+        output_range(number_or_range.first.to_i, number_or_range.last.to_i).each do |output|
+          puts output
+        end
       else
-        puts "Too many numbers!"
+        puts "Invalid Input!"
     end
   end
 end
