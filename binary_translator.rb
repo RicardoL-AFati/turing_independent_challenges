@@ -30,9 +30,14 @@ class BinaryTranslator
 
   def translate(string)
     string.chars.reduce("") do |binary_string, char|
-      in_binary = LETTER_TO_INTEGER[char.upcase.to_sym].to_s(2)
-      leading_zeros = "0" * (6 - in_binary.length)
-      binary_string += "#{leading_zeros}#{in_binary}"
+      if char == " "
+        binary_string += "000000"
+      elsif char =~ /[a-z]/i
+        in_binary = AlPHA_TO_BINARY[char.upcase.to_sym]
+        leading_zeros = "0" * (6 - in_binary.length)
+        binary_string += "#{leading_zeros}#{in_binary}"
+      end
+      binary_string
     end
   end
 end
