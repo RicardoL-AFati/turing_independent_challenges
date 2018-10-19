@@ -15,11 +15,15 @@ class WorldCup
   def all_players(active_only = false)
     grouped_by_position = group_players_by_position
 
-
+    grouped_by_position.sort.reduce("") do |list, (position, players)|
+      list += "#{position.to_s.capitalize}\n"
+      sorted_players = players.sort_by {|player| player.name}
+      sorted_players.each_with_index.reduce do
+    end
   end
 
-  def group_players_by_position
-    get_all_players.group_by do |player|
+  def group_players_by_position(active_only = false)
+    get_all_players(active_only).group_by do |player|
       player.position
     end
   end
