@@ -18,11 +18,11 @@ class WorldCupTest < Minitest::Test
     @modric = Player.new("Luka Modric", :midfielder)
     @perisic = Player.new("Ivan Perisic", :forward)
     @vida = Player.new("Domagoj Vida", :defender)
-    @croatia.add_player(modric)
-    @croatia.add_player(perisic)
-    @croatia.add_player(vida)
+    @croatia.add_player(@modric)
+    @croatia.add_player(@perisic)
+    @croatia.add_player(@vida)
 
-    @world_cup = WorldCup.new(2018, [france, croatia])
+    @world_cup = WorldCup.new(2018, [@france, @croatia])
   end
 
   def test_it_exists
@@ -35,5 +35,21 @@ class WorldCupTest < Minitest::Test
 
   def test_it_has_teams
     assert_equal [@france, @croatia], @world_cup.teams
+  end
+
+  def test_it_can_retrieve_active_players_by_position_none_eliminated
+    expected = [@mbappe, @griezmann, @perisic]
+
+    assert_equal expected,
+    @world_cup.active_players_by_position(:forward)
+  end
+
+  def test_it_can_retrieve_players_by_position_one_eliminated
+    expected = [@mbappe, @griezmann]
+
+    @croatia.eliminated = true
+    
+    assert_equal expected,
+    @world_cup.active_players_by_position(:forward)
   end
 end
