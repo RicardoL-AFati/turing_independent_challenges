@@ -1,0 +1,3 @@
+class WorldCup
+
+end
