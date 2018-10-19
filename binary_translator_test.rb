@@ -24,4 +24,17 @@ class BinaryTranslatorTest < Minitest::Test
     assert_equal "010100010101010010001001001110000111",
     @binary_translator.translate("TURING")
   end
+
+  def test_it_translates_space_as_six_zeros
+    assert_equal "000000", @binary_translator.translate(" ")
+  end
+
+  def test_it_ignores_anything_that_is_not_letter_or_space
+    assert_equal "", @binary_translator.translate("!@{$#%^&*()}")
+  end
+
+  def test_it_translate_a_sentence
+    assert_equal "001000000101001100001100001111000000010111001111010010001100000100",
+    @binary_translator.translate("Hello World!")
+  end
 end
