@@ -4,12 +4,11 @@ require 'minitest/pride'
 
 class PlayerTest < Minitest::Test
   def setup
-    @player = Player.new
     @pogba = Player.new("Paul Pogba", :midfielder)
   end
 
   def test_it_exists
-    assert_instance_of Player, @player
+    assert_instance_of Player, @pogba
   end
 
   def test_it_has_a_name

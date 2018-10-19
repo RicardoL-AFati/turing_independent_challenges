@@ -33,4 +33,22 @@ class TeamTest < Minitest::Test
     assert_equal [@mbappe, @griezmann, @pogba],
     @france.players
   end
+
+  def test_it_can_retrieve_players_by_position_single
+    @france.add_player(@mbappe)
+    @france.add_player(@griezmann)
+    @france.add_player(@pogba)
+
+    assert_equal [@pogba],
+    @france.players_by_position(:midfielder)
+  end
+
+  def test_it_can_retrieve_players_by_position_multiple
+    @france.add_player(@mbappe)
+    @france.add_player(@griezmann)
+    @france.add_player(@pogba)
+
+    assert_equal [@mbappe, @griezmann],
+    @france.players_by_position(:forward)
+  end
 end
