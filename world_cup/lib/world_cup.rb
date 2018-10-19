@@ -11,4 +11,22 @@ class WorldCup
       active_players
     end
   end
+
+  def all_players(active_only = false)
+    grouped_by_position = group_players_by_position
+  end
+
+  def group_players_by_position
+    all_players = @teams.reduce([]) do |players, team|
+      players.concat(team.players)
+    end
+
+    all_players.group_by do
+
+  end
+
+  def get_all_players
+
+  end
+
 end
