@@ -37,4 +37,9 @@ class BinaryTranslatorTest < Minitest::Test
     assert_equal "001000000101001100001100001111000000010111001111010010001100000100",
     @binary_translator.translate("Hello World!")
   end
+
+  def test_it_translate_binary_to_text
+    assert_equal "hello world",
+    @binary_translator.translate_to_text("001000000101001100001100001111000000010111001111010010001100000100")
+  end
 end
