@@ -16,9 +16,10 @@ class WorldCup
     grouped_by_position = group_players_by_position
 
     grouped_by_position.sort.reduce("") do |list, (position, players)|
-      list += "#{position.to_s.capitalize}\n"
-      sorted_players = players.sort_by {|player| player.name}
-      sorted_players.each_with_index.reduce do
+      list += "#{position.to_s.capitalize}s"
+      list += get_player_list(sort_by_name(players))
+      require 'pry'; binding.pry
+      list
     end
   end
 
@@ -34,4 +35,15 @@ class WorldCup
     end
   end
 
+  def sort_by_name(players)
+    players.sort_by {|player| player.name}
+  end
+
+  def get_player_list(players)
+    players.reduce("") do |player_list, player|
+      player_list += "\n\t- #{player.name}"
+      player_list += "\n\n" if player == players.last
+      player_list
+    end
+  end
 end
