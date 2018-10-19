@@ -53,7 +53,29 @@ class WorldCupTest < Minitest::Test
     @world_cup.active_players_by_position(:forward)
   end
 
-  def test_it_returns_all_players_as_a_string_none_elminated
+  def test_it_can_retrieve_all_players_as_single_array
+    expected = [@mbappe, @griezmann, @pogba, @modric, @perisic, @vida]
+
+    assert_equal expected, @world_cup.get_all_players
+  end
+
+  def test_it_can_retrieve_all_players_as_single_array_only_active_team
+    @world_cup.teams[1].eliminated = true
+
+    expected = [@mbappe, @griezmann, @pogba]
+
+    assert_equal expected, @world_cup.get_all_players(true)
+  end
+
+  def test_it_returns_all_players_as_a_string_no_team_elminated
+    skip
+    expected = "Defenders\n\t- Domagoj Vida\n\nForwards\n\t- Antoine Griezmann\n\t- Ivan Perisic\n\t- Kylian Mbappe\n\nMidfielders\n\t- Luka Modric\n\t- Paul Pogba"
+
+    assert_equal expected, @world_cup.all_players
+  end
+
+  def test_it_returns_all_players_as_a_string_one_team_elminated
+    skip
     expected = "Defenders\n\t- Domagoj Vida\n\nForwards\n\t- Antoine Griezmann\n\t- Ivan Perisic\n\t- Kylian Mbappe\n\nMidfielders\n\t- Luka Modric\n\t- Paul Pogba"
 
     assert_equal expected, @world_cup.all_players

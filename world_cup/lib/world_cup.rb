@@ -31,7 +31,12 @@ class WorldCup
 
   def get_all_players(active_only = false)
     @teams.reduce([]) do |players, team|
-      players.concat(team.players)
+      if active_only
+        players.concat(team.players) if not team.eliminated
+      else
+        players.concat(team.players)
+      end
+      players
     end
   end
 
