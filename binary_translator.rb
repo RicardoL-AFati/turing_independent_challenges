@@ -1,42 +1,48 @@
 class BinaryTranslator
   LETTER_TO_BINARY = {
-    A: 1.to_s(2),
-    B: 2.to_s(2),
-    C: 3.to_s(2),
-    D: 4.to_s(2),
-    E: 5.to_s(2),
-    F: 6.to_s(2),
-    G: 7.to_s(2),
-    H: 8.to_s(2),
-    I: 9.to_s(2),
-    J: 10.to_s(2),
-    K: 11.to_s(2),
-    L: 12.to_s(2),
-    M: 13.to_s(2),
-    N: 14.to_s(2),
-    O: 15.to_s(2),
-    P: 16.to_s(2),
-    Q: 17.to_s(2),
-    R: 18.to_s(2),
-    S: 19.to_s(2),
-    T: 20.to_s(2),
-    U: 21.to_s(2),
-    V: 22.to_s(2),
-    W: 23.to_s(2),
-    X: 24.to_s(2),
-    Y: 25.to_s(2),
-    Z: 26.to_s(2)
+    A: "0" * (6 - (1.to_s(2)).length) + 1.to_s(2),
+    B: "0" * (6 - (2.to_s(2)).length) + 2.to_s(2),
+    C: "0" * (6 - (3.to_s(2)).length) + 3.to_s(2),
+    D: "0" * (6 - (4.to_s(2)).length) + 4.to_s(2),
+    E: "0" * (6 - (5.to_s(2)).length) + 5.to_s(2),
+    F: "0" * (6 - (6.to_s(2)).length) + 6.to_s(2),
+    G: "0" * (6 - (7.to_s(2)).length) + 7.to_s(2),
+    H: "0" * (6 - (8.to_s(2)).length) + 8.to_s(2),
+    I: "0" * (6 - (9.to_s(2)).length) + 9.to_s(2),
+    J: "0" * (6 - (10.to_s(2)).length) + 10.to_s(2),
+    K: "0" * (6 - (11.to_s(2)).length) + 11.to_s(2),
+    L: "0" * (6 - (12.to_s(2)).length) + 12.to_s(2),
+    M: "0" * (6 - (13.to_s(2)).length) + 13.to_s(2),
+    N: "0" * (6 - (14.to_s(2)).length) + 14.to_s(2),
+    O: "0" * (6 - (15.to_s(2)).length) + 15.to_s(2),
+    P: "0" * (6 - (16.to_s(2)).length) + 16.to_s(2),
+    Q: "0" * (6 - (17.to_s(2)).length) + 17.to_s(2),
+    R: "0" * (6 - (18.to_s(2)).length) + 18.to_s(2),
+    S: "0" * (6 - (19.to_s(2)).length) + 19.to_s(2),
+    T: "0" * (6 - (20.to_s(2)).length) + 20.to_s(2),
+    U: "0" * (6 - (21.to_s(2)).length) + 21.to_s(2),
+    V: "0" * (6 - (22.to_s(2)).length) + 22.to_s(2),
+    W: "0" * (6 - (23.to_s(2)).length) + 23.to_s(2),
+    X: "0" * (6 - (24.to_s(2)).length) + 24.to_s(2),
+    Y: "0" * (6 - (25.to_s(2)).length) + 25.to_s(2),
+    Z: "0" * (6 - (26.to_s(2)).length) + 26.to_s(2)
   }
-
+  # require 'pry'; binding.pry
   def translate(string)
     string.chars.reduce("") do |binary_string, char|
       binary_string += "000000" if char == " "
-      if char =~ /[a-z]/i
-        in_binary = LETTER_TO_BINARY[char.upcase.to_sym]
-        leading_zeros = "0" * (6 - in_binary.length)
-        binary_string += "#{leading_zeros}#{in_binary}"
-      end
+      binary_string += LETTER_TO_BINARY[char.upcase.to_sym] if char =~ /[a-z]/i
       binary_string
     end
   end
+
+  # def translate_to_text(binary_string)
+  #   binary_numbers = binary_string.chars
+  #
+  #   final_text = ""
+  #   until binary_numbers.empty?
+  #     binary_char = binary_numbers.slice!(0, 6).join
+  #
+  #   end
+  # end
 end
