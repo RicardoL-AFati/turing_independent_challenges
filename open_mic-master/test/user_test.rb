@@ -6,12 +6,18 @@ require './lib/joke'
 class UserTest < Minitest::Test
   def setup
     @sal = User.new("Sal")
-    @megan = User.new("Sal")
+    @megan = User.new("Megan")
 
     @joke_1 = Joke.new({
       id: 1,
       question: "Why did the strawberry cross the road?",
       answer: "Because his mother was in a jam."
+    })
+
+    @joke_2 = Joke.new({
+      id: 2,
+      question: "How do you keep a lion from charging?",
+      answer: "Take away its credit cards."
     })
   end
 
@@ -48,5 +54,17 @@ class UserTest < Minitest::Test
 
     assert_equal [@joke_1], @megan.jokes
     assert_equal 1, @megan.jokes.count
+  end
+
+  def test_it_can_perform_routine_and_add_several_jokes_to_other_user
+    @sal.learn(@joke_1)
+    @sal.learn(@joke_2)
+
+    assert_empty @megan.jokes
+
+    @sal.perform_routine_for(@megan)
+
+    assert_equal [@joke_1, @joke_2], @megan.jokes
+    assert_equal 2, @megan.jokes.count
   end
 end
