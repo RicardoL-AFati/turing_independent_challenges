@@ -13,12 +13,12 @@ class WorldCup
   end
 
   def all_players(active_only = false)
-    grouped_by_position = group_players_by_position
+    grouped_by_position = group_players_by_position(active_only).sort
 
-    grouped_by_position.sort.reduce("") do |list, (position, players)|
+    grouped_by_position.reduce("") do |list, (position, players)|
       list += "#{position.to_s.capitalize}s"
       list += get_player_list(sort_by_name(players))
-      require 'pry'; binding.pry
+      list = list.chomp.chomp if grouped_by_position.last[0] == position
       list
     end
   end
