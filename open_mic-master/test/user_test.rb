@@ -6,6 +6,7 @@ require './lib/joke'
 class UserTest < Minitest::Test
   def setup
     @sal = User.new("Sal")
+    @megan = User.new("Sal")
 
     @joke_1 = Joke.new({
       id: 1,
@@ -37,5 +38,13 @@ class UserTest < Minitest::Test
 
     @sal.learn(@joke_1)
     assert_equal [@joke_1], @sal.jokes
+  end
+
+  def test_it_can_tell_jokes_to_another_user_and_add_to_their_jokes
+    assert_empty @megan.jokes
+
+    @sal.tell(@megan, @joke_1)
+
+    assert_equal [@joke_1], @megan.jokes
   end
 end
