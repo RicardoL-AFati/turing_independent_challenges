@@ -67,4 +67,12 @@ class UserTest < Minitest::Test
     assert_equal [@joke_1, @joke_2], @megan.jokes
     assert_equal 2, @megan.jokes.count
   end
+
+  def test_it_can_learn_a_routine
+    assert_empty @sal.jokes
+
+    @sal.learn_routine('./jokes.csv')
+
+    assert_equal 100, @sal.jokes.count
+  end
 end
