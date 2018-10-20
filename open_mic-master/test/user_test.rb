@@ -38,6 +38,7 @@ class UserTest < Minitest::Test
 
     @sal.learn(@joke_1)
     assert_equal [@joke_1], @sal.jokes
+    assert_equal 1, @sal.jokes.count
   end
 
   def test_it_can_tell_jokes_to_another_user_and_add_to_their_jokes
@@ -46,5 +47,6 @@ class UserTest < Minitest::Test
     @sal.tell(@megan, @joke_1)
 
     assert_equal [@joke_1], @megan.jokes
+    assert_equal 1, @megan.jokes.count
   end
 end
