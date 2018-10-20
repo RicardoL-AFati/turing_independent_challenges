@@ -67,17 +67,16 @@ class WorldCupTest < Minitest::Test
     assert_equal expected, @world_cup.get_all_players(true)
   end
 
-  def test_it_returns_all_players_as_a_string_no_team_elminated
-    skip
+  def test_it_returns_all_players_as_a_string_no_team_eliminated
     expected = "Defenders\n\t- Domagoj Vida\n\nForwards\n\t- Antoine Griezmann\n\t- Ivan Perisic\n\t- Kylian Mbappe\n\nMidfielders\n\t- Luka Modric\n\t- Paul Pogba"
 
     assert_equal expected, @world_cup.all_players
   end
 
-  def test_it_returns_all_players_as_a_string_one_team_elminated
-    skip
-    expected = "Defenders\n\t- Domagoj Vida\n\nForwards\n\t- Antoine Griezmann\n\t- Ivan Perisic\n\t- Kylian Mbappe\n\nMidfielders\n\t- Luka Modric\n\t- Paul Pogba"
+  def test_it_returns_all_players_as_a_string_one_team_eliminated
+    expected = "Forwards\n\t- Antoine Griezmann\n\t- Kylian Mbappe\n\nMidfielders\n\t- Paul Pogba"
 
-    assert_equal expected, @world_cup.all_players
+    @world_cup.teams[1].eliminated = true
+    assert_equal expected, @world_cup.all_players(true)
   end
 end
