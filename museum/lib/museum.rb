@@ -12,9 +12,14 @@ class Museum
 
   def admit(patron)
     @revenue += 20
+    update_exhibits_based_on_interests(patron)
+  end
 
-    patrons.interests.each do |interest|
-      exhibits[interest.to_sym][:attendees] += 1
+  def update_exhibits_based_on_interests(patron)
+    patron.interests.each do |interest|
+      if @exhibits.key?(interest.to_sym)
+        @exhibits[interest.to_sym][:attendees] += 1
+      end
     end
   end
 end
