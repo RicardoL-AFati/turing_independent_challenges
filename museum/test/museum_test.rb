@@ -14,6 +14,10 @@ class MuseumTest < Minitest::Test
 
     @sally = Patron.new("Sally")
     @sally.add_interest("Dead Sea Scrolls")
+
+    @joe = Patron.new("Joe")
+    @joe.add_interest("Gems and Minerals")
+    @joe.add_interest("Dead Sea Scrolls")
   end
 
   def test_it_exists
@@ -82,4 +86,27 @@ class MuseumTest < Minitest::Test
 
     assert_equal expected, @dmns.patrons_of("Dead Sea Scrolls")
   end
+
+  def test_it_returns_sorted_exhibits_by_number_of_patrons
+    @dmns.add_exhibit("Imax", 15)
+    @dmns.add_exhibit("Dead Sea Scrolls", 10)
+    @dmns.add_exhibit("Gems and Minerals", 0)
+
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+    @dmns.admit(@joe)
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+    @dmns.admit(@joe)
+
+    expected = {
+      :"Dead Sea Scrolls"=>{:cost=>10, :patrons=>["Bob", "Sally", "Joe", "Bob", "Sally", "Joe"]},
+      :"Gems and Minerals"=>{:cost=>0, :patrons=>["Bob", "Joe", "Bob", "Joe"]},
+      :Imax=>{:cost=>15, :patrons=>["Bob", "Bob"]}
+    }
+
+    assert_equal expected, @dmns.exhibits_by_attendees
+  end
+
+
 end
