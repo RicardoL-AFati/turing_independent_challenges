@@ -21,4 +21,15 @@ class LibraryTest < Minitest::Test
   def test_it_has_no_books_when_created
     assert_empty @dpl.books
   end
+
+  def test_it_can_receive_books
+    assert_empty @dpl.books
+
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+
+    assert_equal [@jane_eyre, @mockingbird, @villette], @dpl.books
+    assert_equal 3, @dpl.books.count
+  end
 end
