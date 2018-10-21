@@ -53,12 +53,6 @@ class LibraryTest < Minitest::Test
   end
 
   def test_it_can_find_books_by_author
-    @dpl.add_to_collection(@jane_eyre)
-    @dpl.add_to_collection(@mockingbird)
-    @dpl.add_to_collection(@villette)
-  end
-
-  def test_it_can_find_books_by_publication_date
     expected = {
      "Jane Eyre" => @jane_eyre,
      "Villette"  => @villette
@@ -69,5 +63,14 @@ class LibraryTest < Minitest::Test
     @dpl.add_to_collection(@villette)
 
     assert_equal expected, @dpl.find_by_author("Charlotte Bronte")
+  end
+
+  def test_it_can_find_books_by_publication_date
+
+    skip
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+
   end
 end
