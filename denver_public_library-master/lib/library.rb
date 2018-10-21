@@ -11,4 +11,8 @@ class Libary
   def include?(title)
     @books.find {|book| book.title == title}
   end
+
+  def card_catalogue
+    @books.sort_by {|book| book.author_last_name}
+  end
 end

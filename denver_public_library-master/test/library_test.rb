@@ -41,4 +41,14 @@ class LibraryTest < Minitest::Test
     assert @dpl.include?("To Kill a Mockingbird")
     refute @dpl.include?("A Connecticut Yankee in King Arthur's Court")
   end
+
+  def test_it_can_return_sorted_books_by_author_last_name
+    expected = [@jane_eyre, @villette, @mockingbird]
+
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+    
+    assert_equal expected, @dpl.card_catalogue
+  end
 end
