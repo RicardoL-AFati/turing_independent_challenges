@@ -26,4 +26,22 @@ class Museum
   def patrons_of(exhibit_name)
     @exhibits[exhibit_name.to_sym][:patrons].uniq
   end
+
+  def exhibits_by_attendees
+    sorted_exhibit_array = sort_by_attendees_most_to_least
+    get_hash_from_exhibit_array(sorted_exhibit_array)
+  end
+
+  def sort_by_attendees_most_to_least
+    @exhibits.sort do |(a, attributes_a), (b, attributes_b)|
+      attributes_b[:patrons].count <=> attributes_a[:patrons].count
+    end
+  end
+
+  def get_hash_from_exhibit_array(array)
+    array.reduce({}) do |hash, exhibit_sub_array|
+      hash[exhibit_sub_array[0]] = exhibit_sub_array[1]
+      hash
+    end
+  end
 end
