@@ -22,4 +22,8 @@ class Museum
       end
     end
   end
+
+  def patrons_of(exhibit_name)
+    @exhibits[exhibit_name.to_sym][:patrons].uniq
+  end
 end
