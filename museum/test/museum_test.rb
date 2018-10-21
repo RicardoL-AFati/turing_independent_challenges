@@ -52,4 +52,21 @@ class MuseumTest < Minitest::Test
 
     assert_equal 40, @dmns.revenue
   end
+
+  def test_it_can_admit_patrons_and_update_attendees_for_exhibits
+    @dmns.add_exhibit("Dead Sea Scrolls", 10)
+    @dmns.add_exhibit("Gems and Minerals", 0)
+    @dmns.add_exhibit("Imax", 15)
+
+    assert_equal 0, @dmns.exhibits[:"Dead Sea Scrolls"][:attendees]
+    assert_equal 0, @dmns.exhibits[:"Gems and Minerals"][:attendees]
+    assert_equal 0, @dmns.exhibits[:Imax][:attendees]
+
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+
+    assert_equal 2, @dmns.exhibits[:"Dead Sea Scrolls"][:attendees]
+    assert_equal 1, @dmns.exhibits[:"Gems and Minerals"][:attendees]
+    assert_equal 1, @dmns.exhibits[:Imax][:attendees]
+  end
 end
