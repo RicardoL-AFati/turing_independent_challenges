@@ -66,11 +66,14 @@ class LibraryTest < Minitest::Test
   end
 
   def test_it_can_find_books_by_publication_date
+    expected = {
+      "To Kill a Mockingbird" => @mockingbird
+    }
 
-    skip
     @dpl.add_to_collection(@jane_eyre)
     @dpl.add_to_collection(@mockingbird)
     @dpl.add_to_collection(@villette)
 
+    assert_equal expected, @dpl.find_by_publication_date("1960")
   end
 end

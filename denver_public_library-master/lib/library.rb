@@ -24,8 +24,15 @@ class Libary
     found_books ? get_title_and_book_hash(found_books) : false
   end
 
+  def find_by_publication_date(date)
+    found_books = @books.find_all do |book|
+      book.publication_date.include?(date)
+    end
+    found_books ? get_title_and_book_hash(found_books) : false
+  end
+
   def get_title_and_book_hash(found_books)
-    hash = found_books.reduce({}) do |hash, book|
+    found_books.reduce({}) do |hash, book|
       hash[book.title] = book
       hash
     end
