@@ -17,4 +17,8 @@ class User
   def perform_routine_for(user)
     @jokes.each {|joke| user.learn(joke)}
   end
+
+  def learn_routine(routine)
+    require 'pry'; binding.pry
+  end
 end
