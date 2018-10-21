@@ -32,4 +32,13 @@ class LibraryTest < Minitest::Test
     assert_equal [@jane_eyre, @mockingbird, @villette], @dpl.books
     assert_equal 3, @dpl.books.count
   end
+
+  def test_it_can_return_if_book_is_included_in_collection_by_title
+    @dpl.add_to_collection(@jane_eyre)
+    @dpl.add_to_collection(@mockingbird)
+    @dpl.add_to_collection(@villette)
+
+    assert @dpl.include?("To Kill a Mockingbird")
+    refute @dpl.include?("A Connecticut Yankee in King Arthur's Court")
+  end
 end
