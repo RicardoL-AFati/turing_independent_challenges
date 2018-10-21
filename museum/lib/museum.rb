@@ -1,5 +1,5 @@
 class Museum
-  attr_reader :name
+  attr_reader :name, :exhibits, :revenue
   def initialize(name)
     @name = name
     @exhibits = {}
@@ -8,5 +8,9 @@ class Museum
 
   def add_exhibit(name, cost)
     @exhibits[name.to_sym] = {cost: cost, attendees: 0}
+  end
+
+  def admit(patron)
+    @revenue += 20
   end
 end
