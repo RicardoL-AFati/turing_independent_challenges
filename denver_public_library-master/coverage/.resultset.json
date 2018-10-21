@@ -1,0 +1,56 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/ricardoledesma/code/turing_independent_challenges/denver_public_library-master/test/book_test.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        5,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/ricardoledesma/code/turing_independent_challenges/denver_public_library-master/lib/book.rb": [
+        1,
+        1,
+        1,
+        5,
+        5,
+        5,
+        5,
+        null,
+        null
+      ],
+      "/Users/ricardoledesma/code/turing_independent_challenges/denver_public_library-master/test/library_test.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1540131086
+  }
+}
