@@ -12,5 +12,9 @@ class Museum
 
   def admit(patron)
     @revenue += 20
+
+    patrons.interests.each do |interest|
+      exhibits[interest.to_sym][:attendees] += 1
+    end
   end
 end
