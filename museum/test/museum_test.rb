@@ -61,12 +61,25 @@ class MuseumTest < Minitest::Test
     assert_equal 0, @dmns.exhibits[:"Dead Sea Scrolls"][:patrons].count
     assert_equal 0, @dmns.exhibits[:"Gems and Minerals"][:patrons].count
     assert_equal 0, @dmns.exhibits[:Imax][:patrons].count
-    
+
     @dmns.admit(@bob)
     @dmns.admit(@sally)
 
     assert_equal 2, @dmns.exhibits[:"Dead Sea Scrolls"][:patrons].count
     assert_equal 1, @dmns.exhibits[:"Gems and Minerals"][:patrons].count
     assert_equal 1, @dmns.exhibits[:Imax][:patrons].count
+  end
+
+  def test_it_returns_patrons_of_an_exhibit
+    @dmns.add_exhibit("Dead Sea Scrolls", 10)
+
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+
+    expected = ["Bob", "Sally"]
+
+    assert_equal expected, @dmns.patrons_of("Dead Sea Scrolls")
   end
 end
