@@ -44,4 +44,10 @@ class Museum
       hash
     end
   end
+
+  def remove_unpopular_exhibits(threshold)
+    @exhibits.delete_if do |exhibit, attributes|
+      attributes[:patrons].count < threshold
+    end
+  end
 end
