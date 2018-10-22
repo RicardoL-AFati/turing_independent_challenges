@@ -108,5 +108,30 @@ class MuseumTest < Minitest::Test
     assert_equal expected, @dmns.exhibits_by_attendees
   end
 
+  def test_it_can_remove_unpopular_exhibits
+    @dmns.add_exhibit("Imax", 15)
+    @dmns.add_exhibit("Dead Sea Scrolls", 10)
+    @dmns.add_exhibit("Gems and Minerals", 0)
 
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+    @dmns.admit(@joe)
+
+    expected = {
+      :"Dead Sea Scrolls"=>{:cost=>10, :patrons=>["Bob", "Sally", "Joe"]},
+      :"Gems and Minerals"=>{:cost=>0, :patrons=>["Bob", "Joe"]},
+      :Imax=>["Bob"]
+    }
+
+    assert_equal expected, @dmns.exhibits
+
+    @dmns.remove_unpopular_exhibits(2)
+    
+    expected = {
+      :"Dead Sea Scrolls"=>{:cost=>10, :patrons=>["Bob", "Sally", "Joe"]},
+      :"Gems and Minerals"=>{:cost=>0, :patrons=>["Bob", "Joe"]}
+    }
+
+    assert_equal expected, @dmns.exhibits
+  end
 end
