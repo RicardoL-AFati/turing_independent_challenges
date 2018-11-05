@@ -36,6 +36,19 @@ class Pantry
     list
   end
 
+  def what_can_i_make
+    cookbook.reduce([]) do |can_make, (recipe, ingredients)|
+      can_make << recipe.to_s if enough_in_stock?(ingredients)
+      can_make
+    end
+  end
+
+  def enough_in_stock?(ingredients)
+    ingredients.all? do |ingredient, amount|
+      stock[ingredient] >= amount
+    end
+  end
+
   def keys_to_sym(hash)
     hash.reduce({}) do |new_h, (k,v)|
       new_h[k.to_sym] = v
