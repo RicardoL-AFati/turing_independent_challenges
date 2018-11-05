@@ -25,4 +25,12 @@ class Market
     end.flatten.uniq.sort
   end
 
+  def total_inventory
+    vendors.reduce(Hash.new(0)) do |total_i, vendor|
+      vendor.inventory.each do |item, amount|
+        total_i[item] += amount
+      end
+      total_i
+    end
+  end
 end
