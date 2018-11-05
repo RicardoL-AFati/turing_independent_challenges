@@ -49,23 +49,23 @@ class PantryTest < Minitest::Test
   end
 
   def test_it_can_have_recipe_ingredients_added_to_shopping_list
-    assert_equal ({}) @pantry.shopping_list
+    assert_equal ({}), @pantry.shopping_list
 
     @pantry.add_to_shopping_list(@r0)
 
     expected = {"Cheese" => 20, "Flour" => 20}
 
-    assert_equal expected, @panty.shopping_list
+    assert_equal expected, @pantry.shopping_list
   end
 
   def test_it_can_have_multiple_recipes_added_to_list
-    assert_equal ({}) @pantry.shopping_list
+    assert_equal ({}), @pantry.shopping_list
 
     @pantry.add_to_shopping_list(@r0)
     @pantry.add_to_shopping_list(@r1)
 
     expected = {"Cheese" => 25, "Flour" => 20, "Spaghetti Noodles" => 10, "Marinara Sauce" => 10}
 
-    assert_equal expected, @panty.shopping_list
+    assert_equal expected, @pantry.shopping_list
   end
 end
