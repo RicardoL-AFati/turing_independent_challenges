@@ -36,6 +36,20 @@ class Pantry
     list
   end
 
+  def how_many_can_i_make
+    what_can_i_make.reduce({}) do |how_many, recipe|
+      least_ingredient, amount = find_least_of_ingredient_for(recipe)
+      how_many[recipe] = stock[least_ingredient] / amount
+      how_many
+    end
+  end
+
+  def find_least_of_ingredient_for(recipe)
+    cookbook[recipe.to_sym].min_by do |ingredient, amount|
+      stock[ingredient] / amount
+    end
+  end
+
   def what_can_i_make
     cookbook.reduce([]) do |can_make, (recipe, ingredients)|
       can_make << recipe.to_s if enough_in_stock?(ingredients)
