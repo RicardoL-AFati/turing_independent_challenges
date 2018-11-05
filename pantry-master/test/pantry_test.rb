@@ -1,5 +1,6 @@
 require './lib/pantry'
 require './lib/recipe'
+require 'o_stream_catcher'
 require 'minitest/autorun'
 require 'minitest/pride'
 
@@ -67,5 +68,18 @@ class PantryTest < Minitest::Test
     expected = {"Cheese" => 25, "Flour" => 20, "Spaghetti Noodles" => 10, "Marinara Sauce" => 10}
 
     assert_equal expected, @pantry.shopping_list
+  end
+
+  def test_it_can_print_shopping_list_and_return
+    @pantry.add_to_shopping_list(@r0)
+    @pantry.add_to_shopping_list(@r1)
+
+    result, stdout, stderr = OStreamCatcher.catch do
+      @pantry.print_shopping_list
+    end
+
+    expected = "* Cheese: 25\n* Flour: 20\n* Spaghetti Noodles: 10\n* Marinara Sauce: 10"
+
+    assert_equal expected, result
   end
 end
