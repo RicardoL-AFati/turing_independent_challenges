@@ -74,12 +74,13 @@ class PantryTest < Minitest::Test
     @pantry.add_to_shopping_list(@r0)
     @pantry.add_to_shopping_list(@r1)
 
-    result, stdout, stderr = OStreamCatcher.catch do
+    result, stdout = OStreamCatcher.catch do
       @pantry.print_shopping_list
     end
 
     expected = "* Cheese: 25\n* Flour: 20\n* Spaghetti Noodles: 10\n* Marinara Sauce: 10"
 
     assert_equal expected, result
+    assert_equal "#{expected}\n", stdout
   end
 end
