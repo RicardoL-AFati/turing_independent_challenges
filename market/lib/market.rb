@@ -33,4 +33,24 @@ class Market
       total_i
     end
   end
+
+  def sell(item, quantity)
+    return false unless total_inventory[item] > quantity
+
+    update_vendors(item, quantity)
+  end
+
+  def update_vendors(item, quantity)
+    vendors.reduce(quantity) do |to_sell, vendor|
+      next vendor unless vendor.inventory.include?(item)
+      if vendor.inventory[item] >= to_sell
+        vendor.sell(item)
+        return true
+      else
+        to_sell -= vendor.inventory(item)
+        vendor.sell(item, to_sell)
+      end
+      to_sell
+    end
+  end
 end
