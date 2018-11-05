@@ -38,4 +38,32 @@ class VendorTest < Minitest::Test
 
     assert_equal expected, @vendor.inventory
   end
+
+  def test_it_can_sell_all_of_an_items_inventory
+    @vendor.stock("Peaches", 30)
+    @vendor.stock("Tomatoes", 12)
+
+    expected = {"Peaches"=>30, "Tomatoes"=>12}
+
+    assert_equal expected, @vendor.inventory
+
+    @vendor.sell("Peaches")
+    expected = {"Peaches"=>0, "Tomatoes"=>12}
+
+    assert_equal expected, @vendor.inventory
+  end
+
+  def test_it_can_sell_some_of_an_items_inventory
+    @vendor.stock("Peaches", 30)
+    @vendor.stock("Tomatoes", 12)
+
+    expected = {"Peaches"=>30, "Tomatoes"=>12}
+
+    assert_equal expected, @vendor.inventory
+
+    @vendor.sell("Tomatoes", 10)
+    expected = {"Peaches"=>30, "Tomatoes"=>2}
+
+    assert_equal expected, @vendor.inventory
+  end
 end
