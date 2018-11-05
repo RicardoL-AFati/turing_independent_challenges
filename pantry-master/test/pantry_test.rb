@@ -133,4 +133,20 @@ class PantryTest < Minitest::Test
 
     assert_equal ({"Pickles" => 4, "Peanuts" => 2}), @pantry.how_many_can_i_make
   end
+
+  def test_it_returns_how_many_of_recipes_you_can_make_based_on_stock_v2
+    @pantry.add_to_cookbook(@r1)
+    @pantry.add_to_cookbook(@r2)
+    @pantry.add_to_cookbook(@r3)
+
+    @pantry.restock("Spaghetti Noodles", 500)
+    @pantry.restock("Marinara Sauce", 500)
+    @pantry.restock("Cheese", 10)
+    @pantry.restock("Brine", 10)
+    @pantry.restock("Cucumbers", 500)
+    @pantry.restock("Raw nuts", 5)
+    @pantry.restock("Salt", 5)
+
+    assert_equal ({"Spaghetti" => 2, "Pickles" => 1}), @pantry.how_many_can_i_make
+  end
 end
