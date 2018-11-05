@@ -83,4 +83,24 @@ class PantryTest < Minitest::Test
     assert_equal expected, result
     assert_equal "#{expected}\n", stdout
   end
+
+  def test_it_starts_with_empty_cookbook
+    assert_equal ({}), @pantry.cookbook
+  end
+
+  def test_it_can_add_to_cook_book
+    assert_equal ({}), @pantry.cookbook
+
+    @pantry.add_to_cookbook(@r0)
+    @pantry.add_to_cookbook(@r2)
+    @pantry.add_to_cookbook(@r3)
+
+    expected = {
+      :"Cheese Pizza" => {:Cheese => 20, :Flour => 20},
+      :Pickles => {:Brine => 10, :Cucumbers => 30},
+      :Peanuts => {:"Raw nuts" => 10, :Salt => 10}
+    }
+
+    assert_equal expected, @pantry.cookbook
+  end
 end
