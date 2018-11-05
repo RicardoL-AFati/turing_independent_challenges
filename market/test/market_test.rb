@@ -56,7 +56,7 @@ class MarketTest < Minitest::Test
 
     expected = [@vendor_1, @vendor_3]
 
-    assert_equal expected, market.vendors_that_sell("Peaches")
+    assert_equal expected, @market.vendors_that_sell("Peaches")
   end
 
   def test_it_can_return_vendors_that_sell_different_item
@@ -66,6 +66,6 @@ class MarketTest < Minitest::Test
 
     expected = [@vendor_2]
 
-    assert_equal expected, market.vendors_that_sell("Banana Nice Cream")
+    assert_equal expected, @market.vendors_that_sell("Banana Nice Cream")
   end
 end
