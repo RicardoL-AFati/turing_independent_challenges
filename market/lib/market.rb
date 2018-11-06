@@ -42,13 +42,13 @@ class Market
 
   def update_vendors(item, quantity)
     vendors.reduce(quantity) do |to_sell, vendor|
-      next vendor unless vendor.inventory.include?(item)
+      next to_sell unless vendor.inventory.include?(item)
       if vendor.inventory[item] >= to_sell
-        vendor.sell(item)
+        vendor.sell(item, to_sell)
         return true
       else
-        to_sell -= vendor.inventory(item)
-        vendor.sell(item, to_sell)
+        to_sell -= vendor.inventory[item]
+        vendor.sell(item)
       end
       to_sell
     end
