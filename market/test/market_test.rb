@@ -90,14 +90,26 @@ class MarketTest < Minitest::Test
   end
 
   def test_trying_to_sell_an_item_not_present_returns_false
+    @market.add_vendor(@vendor_1)
+    @market.add_vendor(@vendor_2)
+    @market.add_vendor(@vendor_3)
+
     refute @market.sell("Onions", 1)
   end
 
   def test_it_trying_to_sell_more_than_total_inventory_returns_false
+    @market.add_vendor(@vendor_1)
+    @market.add_vendor(@vendor_2)
+    @market.add_vendor(@vendor_3)
+
     refute @market.sell("Peaches", 200)
   end
 
   def test_it_can_sell_items_and_update_vendor_inventories
+    @market.add_vendor(@vendor_1)
+    @market.add_vendor(@vendor_2)
+    @market.add_vendor(@vendor_3)
+
     assert @market.sell("Peaches", 40)
 
     assert_equal 0, @vendor_1.check_stock("Peaches")
